@@ -28,3 +28,18 @@ app.get('/app.js', cors(), function (req, res) {
 app.get('/zip', cors(), function (req, res) {
   Host.find({}, 'zip', (err, data) => res.send(data));
 });
+
+// post
+app.post('/', cors(), function(req, res) {
+  Host.create({})
+});
+
+// put
+app.put('/', cors(), function(req, res) {
+  Host.updateOne({}, , (err, data) => res.send('works'))
+});
+
+// delete
+app.delete('/', cors(), function(req, res) {
+  Host.deleteOne({}, , (err, data) => res.send('deleted'))
+});
