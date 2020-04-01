@@ -26,6 +26,7 @@ function carouselSlider(carouselClass, entryClass, prevButtonClass, nextButtonCl
     }
   }
 
+
   function handlePrev() {
     counter--;
     entries.forEach(entry => {

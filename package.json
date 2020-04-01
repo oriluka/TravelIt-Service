@@ -11,6 +11,7 @@
     "devStart": "nodemon ./server/server.js",
     "start": "pm2 start ./server/server.js",
     "build": "webpack --config webpack.config.js -w",
+    "build2": "webpack --mode production",
     "seed": "node server/models/seed.js",
     "test": "jest"
   },

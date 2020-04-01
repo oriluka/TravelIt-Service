@@ -83,8 +83,7 @@ class Neighborhood extends React.Component {
         {this.state.GettingAround}
         <div className={this.props.css.map}>
           <iframe
-            src={`https://www.google.com/maps/embed/v1/place?key=${this.props.api}
-         &q=${this.props.data.zip}`}>
+            src={`https://www.google.com/maps/embed/v1/place?key=${this.props.api}&q=${this.props.data.zip}`}>
           </iframe>
           <p className={this.props.css.mapP}>
        Exact location information is provided after a booking is confirmed.
