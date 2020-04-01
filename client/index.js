@@ -14,13 +14,13 @@ function imageSlideClick(className) {
   const el = document.querySelector('.' + className);
 }
 
-axios.get('http://18.212.178.205:3004/zip', {})
+axios.get('http://localhost:3004/zip', {})
   .then(res => {
     let randomIndex = Math.floor(Math.random() * 10);
     zipCode = res.data[randomIndex].zip;
   })
   .then(() => {
-    axios.get('http://18.212.178.205:3004/area', {
+    axios.get('http://localhost:3004/area', {
       params: {
         zip: zipCode
       }
@@ -30,7 +30,7 @@ axios.get('http://18.212.178.205:3004/zip', {})
   })
   .catch(err => console.log(err))
   .then(() => {
-    axios.get('http://18.212.178.205:3004/host', {
+    axios.get('http://localhost:3004/host', {
       params: {
         zip: zipCode
       }
