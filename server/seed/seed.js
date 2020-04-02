@@ -93,23 +93,23 @@ var createAreasData = function() {
 };
 
 
-// Retrieve links from s3
+////////// Retrieve links from s3 ////
 var links;
 
 urls.getUrls(function(retrieved) {
   // Links now is the object that contains all url info.
   links = retrieved;
 
-  // Now start creating stuf
-  for (var y = 0; y < 10000; y ++) {
+  // Now start creating stuf  // 10000
+  for (var y = 0; y < 10; y ++) {
     const zips = [];
     const hosts = [];
     const areas = [];
     const propertyImages = links.properties;
     const thingsImages = links.thing;
     const hostImages = links.hosts;
-
-    for (var z = 0; z < 1000; z ++) {
+    // change 1 -> 1000
+    for (var z = 0; z < 1; z ++) {
       createHostsData();
       createAreasData();
     }
