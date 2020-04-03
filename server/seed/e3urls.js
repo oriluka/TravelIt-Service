@@ -22,31 +22,17 @@ module.exports.info = info = {
 
 
 
-module.exports.getUrls = function(callback) {
-  s3.listObjectsV2(params, function(err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      for (var i = 0; i < data.Contents.length; i ++) {
-        var key = data.Contents[i].Key;
+module.exports.getUrls =
 
-        // Put in properties
-        if (key[0] === 'p' && key[key.length - 1] !== '/') {
-          info.links.properties.push(key);
-        }
-        // Put in hosts
-        if (key[0] === 'h' && key[key.length - 1] !== '/') {
-          info.links.hosts.push(key);
-        }
-        // Put in things
-        if (key[0] === 't' && key[key.length - 1] !== '/') {
-          info.links.things.push(key);
-        }
-      }
-      console.log('Done retrieving links');
-      callback(info.links)
-    }
-  });
-};
+  // function(err, data) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  s3.listObjectsV2(params).promise();
+
+  ;
+
+
+
 
 
