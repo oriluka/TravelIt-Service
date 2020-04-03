@@ -12,10 +12,11 @@
     "start": "pm2 start ./server/server.js",
     "build": "webpack --config webpack.config.js -w",
     "build2": "webpack --mode production",
-    "seed": "node server/models/seed.js",
+    "seed": "node server/seed/seed.js",
     "test": "jest"
   },
   "dependencies": {
+    "aws-sdk": "^2.651.0",
     "axios": "^0.19.2",
     "cors": "^2.8.5",
     "css-loader": "^3.4.2",
