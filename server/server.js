@@ -47,7 +47,13 @@ app.post('/host', cors(), function(req, res) {
 //   Host.updateOne({}, , (err, data) => res.send('works'))
 // });
 
-// // delete
-// app.delete('/host', cors(), function(req, res) {
-//   Host.deleteOne({}, , (err, data) => res.send('deleted'))
-// });
+// delete
+app.delete('/host', cors(), function(req, res) {
+  Host.deleteOne(req.body, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send('deleted: ' + JSON.stringify(data));
+    }
+  });
+});
