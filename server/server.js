@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 3004;
+const port = 3008;
 const mongoose = require('mongoose');
 const { Host, Area } = require('./models/Schema.js');
 const bodyParser = require('body-parser');
@@ -20,7 +20,15 @@ app.get('/area', cors(), function(req, res) {
 });
 
 app.get('/host', cors(), function(req, res) {
-  Host.find(req.query, (err, arr) => res.send(arr));
+  Host.find(req.query, (err, arr) =>{
+    if (err) {
+      res.status(400);
+      res.send(err);
+    } else {
+      res.status(200);
+      res.send(arr);
+    }
+  });
 });
 
 app.get('/app.js', cors(), function (req, res) {
@@ -33,10 +41,13 @@ app.get('/zip', cors(), function (req, res) {
 
 // post
 app.post('/host', cors(), function(req, res) {
+  console.log(req.body);
   Host.create(req.body, (err, arr) => {
     if (err) {
       console.log(err);
+      res.status(400);
     } else {
+      res.status(200);
       res.send(arr);
     }
   });
@@ -48,6 +59,7 @@ app.put('/host', cors(), function(req, res) {
     if (err) {
       console.log(err);
     } else {
+      res.status(200);
       res.send(data);
     }
   });
@@ -55,11 +67,14 @@ app.put('/host', cors(), function(req, res) {
 
 // delete
 app.delete('/host', cors(), function(req, res) {
-  Host.deleteOne(req.body, (err, data) => {
+  Host.deleteOne(req.query, (err, data) => {
     if (err) {
       console.log(err);
     } else {
+      res.status(200);
       res.send('deleted: ' + JSON.stringify(data));
     }
   });
 });
+
+module.exports = app;
