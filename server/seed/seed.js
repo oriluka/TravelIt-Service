@@ -11,7 +11,7 @@ writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,
 
 const write10Mil = async (writer, encoding, callback) => {
   // console.log('1')
-  var links ={
+  var links = {
     properties: [],
     hosts: [],
     things: []
@@ -41,7 +41,7 @@ const write10Mil = async (writer, encoding, callback) => {
       console.log('ERRRRR')
       console.log(err);
     });
-  function write () {
+  function write() {
 
     let i = 10000000;
     let j = 0;
@@ -82,44 +82,44 @@ const write10Mil = async (writer, encoding, callback) => {
       // var asyncFunc = info.getUrls()
 
 
-        // Links now is the object that contains all url info.
-        // console.log('5')
-        // s3links = retrieved;
-        // for (var y = 0; y < 10; y++) {
-        const zips = [];
-        const hosts = [];
-        const areas = [];
-        const propertyImages = links.properties;
-        const thingsImages = links.things;
-        const hostImages = links.hosts;
+      // Links now is the object that contains all url info.
+      // console.log('5')
+      // s3links = retrieved;
+      // for (var y = 0; y < 10; y++) {
+      const zips = [];
+      const hosts = [];
+      const areas = [];
+      const propertyImages = links.properties;
+      const thingsImages = links.things;
+      const hostImages = links.hosts;
 
 
-        host.zip = faker.address.zipCode().slice(0, 5);
-        host.name = faker.name.firstName();
+      host.zip = faker.address.zipCode().slice(0, 5);
+      host.name = faker.name.firstName();
 
-        host.image = 'https://sdc-mtservice.s3.amazonaws.com/' + hostImages[Math.floor(Math.random() * hostImages.length)];
-        host.city = faker.address.city();
-        host.state = faker.address.stateAbbr();
-        host.body = faker.lorem.sentences();
-        host.interaction = faker.lorem.sentences();
-        host.monthJoined = faker.date.month();
-        host.yearJoined = 2020 - Math.floor(Math.random() * 11);
-        host.review = Math.floor(Math.random() * 500);
-        host.rules.body = faker.lorem.sentences();
-        host.location.body = faker.lorem.sentences();
+      host.image = 'https://sdc-mtservice.s3.amazonaws.com/' + hostImages[Math.floor(Math.random() * hostImages.length)];
+      host.city = faker.address.city();
+      host.state = faker.address.stateAbbr();
+      host.body = faker.lorem.sentences();
+      host.interaction = faker.lorem.sentences();
+      host.monthJoined = faker.date.month();
+      host.yearJoined = 2020 - Math.floor(Math.random() * 11);
+      host.review = Math.floor(Math.random() * 500);
+      host.rules.body = faker.lorem.sentences();
+      host.location.body = faker.lorem.sentences();
 
-        var jsonrules = JSON.stringify(host.rules);
-        var jsonlocation = JSON.stringify(host.location)
+      var jsonrules = JSON.stringify(host.rules);
+      var jsonlocation = JSON.stringify(host.location)
 
-        const data = `${host.zip},${host.name},${host.image},${host.city},${host.state},${host.body},${host.interaction},${host.superhost},${host.verified},${host.monthJoined},${host.yearJoined},${host.review},${jsonrules},${jsonlocation}\n`;
+      const data = `${host.zip},${host.name},${host.image},${host.city},${host.state},${host.body},${host.interaction},${host.superhost},${host.verified},${host.monthJoined},${host.yearJoined},${host.review},${jsonrules},${jsonlocation}\n`;
 
-        if (i === 5000000) {
-          writer.write(data, encoding, callback);
+      if (i === 5000000) {
+        writer.write(data, encoding, callback);
 
-        } else {
-          ok = writer.write(data, encoding);
+      } else {
+        ok = writer.write(data, encoding);
 
-        }
+      }
 
       // });
       // console.log('End s6')
