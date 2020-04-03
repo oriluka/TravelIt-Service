@@ -5,11 +5,13 @@ const cors = require('cors');
 const port = 3004;
 const mongoose = require('mongoose');
 const { Host, Area } = require('./models/Schema.js');
+const bodyParser = require('body-parser');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(express.static(path.resolve(__dirname, '../public')));
+app.use(bodyParser());
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
@@ -31,15 +33,21 @@ app.get('/zip', cors(), function (req, res) {
 
 // post
 app.post('/host', cors(), function(req, res) {
-  Host.create(req.query, (err, arr) => res.send(arr))
+  Host.create(req.body, (err, arr) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(arr);
+    }
+  });
 });
 
-// put
-app.put('/host', cors(), function(req, res) {
-  Host.updateOne({}, , (err, data) => res.send('works'))
-});
+// // put
+// app.put('/host', cors(), function(req, res) {
+//   Host.updateOne({}, , (err, data) => res.send('works'))
+// });
 
-// delete
-app.delete('/host', cors(), function(req, res) {
-  Host.deleteOne({}, , (err, data) => res.send('deleted'))
-});
+// // delete
+// app.delete('/host', cors(), function(req, res) {
+//   Host.deleteOne({}, , (err, data) => res.send('deleted'))
+// });
