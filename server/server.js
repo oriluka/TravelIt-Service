@@ -42,10 +42,16 @@ app.post('/host', cors(), function(req, res) {
   });
 });
 
-// // put
-// app.put('/host', cors(), function(req, res) {
-//   Host.updateOne({}, , (err, data) => res.send('works'))
-// });
+// put
+app.put('/host', cors(), function(req, res) {
+  Host.updateOne(req.body.query, req.body.update, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
 
 // delete
 app.delete('/host', cors(), function(req, res) {
