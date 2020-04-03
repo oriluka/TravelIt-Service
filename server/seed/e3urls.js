@@ -9,10 +9,15 @@ var s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
 
 // Object for the links to go
-module.exports.links = links = {
-  properties: [],
+module.exports.info = info = {
+  links: {
+    properties: [],
+    hosts: [],
+    things: []
+  },
+  zips: [],
   hosts: [],
-  things: []
+  areas: []
 };
 
 
@@ -27,19 +32,19 @@ module.exports.getUrls = function(callback) {
 
         // Put in properties
         if (key[0] === 'p' && key[key.length - 1] !== '/') {
-          links.properties.push(key);
+          info.links.properties.push(key);
         }
         // Put in hosts
         if (key[0] === 'h' && key[key.length - 1] !== '/') {
-          links.hosts.push(key);
+          info.links.hosts.push(key);
         }
         // Put in things
         if (key[0] === 't' && key[key.length - 1] !== '/') {
-          links.things.push(key);
+          info.links.things.push(key);
         }
       }
       console.log('Done retrieving links');
-      callback(links)
+      callback(info.links)
     }
   });
 };

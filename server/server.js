@@ -30,16 +30,16 @@ app.get('/zip', cors(), function (req, res) {
 });
 
 // post
-app.post('/', cors(), function(req, res) {
-  Host.create({})
+app.post('/host', cors(), function(req, res) {
+  Host.create(req.query, (err, arr) => res.send(arr))
 });
 
 // put
-app.put('/', cors(), function(req, res) {
+app.put('/host', cors(), function(req, res) {
   Host.updateOne({}, , (err, data) => res.send('works'))
 });
 
 // delete
-app.delete('/', cors(), function(req, res) {
+app.delete('/host', cors(), function(req, res) {
   Host.deleteOne({}, , (err, data) => res.send('deleted'))
 });

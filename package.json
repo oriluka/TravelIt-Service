@@ -12,7 +12,7 @@
     "start": "pm2 start ./server/server.js",
     "build": "webpack --config webpack.config.js -w",
     "build2": "webpack --mode production",
-    "seed": "node server/models/seed.js",
+    "seed": "node server/seed/seed.js",
     "test": "jest"
   },
   "dependencies": {
