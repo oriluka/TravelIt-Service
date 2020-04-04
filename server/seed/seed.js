@@ -72,7 +72,6 @@ const write10Mil = async (writer, encoding, callback) => {
         }
       };
 
-
       i--;
 
       // Log percentages
@@ -120,7 +119,7 @@ const write10Mil = async (writer, encoding, callback) => {
       var jsonrules = JSON.stringify(host.rules);
       var jsonlocation = JSON.stringify(host.location)
 
-      const data = `${host.zip},${host.name},${host.image},${host.city},${host.state},${host.body},${host.interaction},${host.superhost},${host.verified},${host.monthJoined},${host.yearJoined},${host.review},${jsonrules},${jsonlocation}\n`;
+      const data = `${host.zip}^.-${host.name}^.-${host.image}^.-${host.city}^.-${host.state}^.-${host.body}^.-${host.interaction}^.-${host.superhost}^.-${host.verified}^.-${host.monthJoined}^.-${host.yearJoined}^.-${host.review}^.-${jsonrules}^.-${jsonlocation}\n`;
 
       if (i === 5000000) {
         writer.write(data, encoding, callback);
