@@ -60,7 +60,7 @@ app.put('/host', (req, res) => {
 });
 
 // delete
-app.delete('/host', cors(), (req, res) => {
+app.delete('/host', (req, res) => {
   psql.delete(req.body, (err, data) => {
     if (err) {
       res.status(400);
