@@ -122,7 +122,7 @@ const write10Mil = async (writer, encoding, callback) => {
 
       const data = `${host.zip},${host.name},${host.image},${host.city},${host.state},${host.body},${host.interaction},${host.superhost},${host.verified},${host.monthJoined},${host.yearJoined},${host.review},${jsonrules},${jsonlocation}\n`;
 
-      if (i === 2500000) {
+      if (i === 5000000) {
         writer.write(data, encoding, callback);
 
       } else {
@@ -132,9 +132,9 @@ const write10Mil = async (writer, encoding, callback) => {
 
 
 
-    } while (i > 2500000 && ok);
+    } while (i > 5000000 && ok);
 
-    if (i > 2500000) {
+    if (i > 5000000) {
       writer.once('drain', write)
 
     }
