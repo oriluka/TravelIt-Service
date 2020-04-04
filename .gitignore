@@ -16,7 +16,7 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
-
+hosts.csv
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
@@ -24,3 +24,7 @@ coverage
 build/
 dist/
 config.js
+hosts.csv
+hosts2.csv
+hosts3.csv
+hosts4.csv
