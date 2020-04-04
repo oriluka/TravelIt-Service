@@ -4,9 +4,9 @@ const info = require('./e3urls.js');
 const faker = require('faker');
 
 
-const writeHosts = fs.createWriteStream('hosts3.csv');
+const writeHosts = fs.createWriteStream('hosts.csv');
 
-writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rules,location\n', 'utf8');
+writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround\n', 'utf8');
 
 const write10Mil = async (writer, encoding, callback) => {
 
@@ -75,24 +75,27 @@ const write10Mil = async (writer, encoding, callback) => {
       i--;
 
       // Log percentages
-      if (i === 9950000) {
-        console.log('1%')
+      if (i % 1000000 === 0) {
+        console.log(5000000/i)
       }
-      if (i === 9500000) {
-        console.log('10%')
-      }
-      if (i === 9000000) {
-        console.log('20%')
-      }
-      if (i === 7500000) {
-        console.log('50%')
-      }
-      if (i === 6250000) {
-        console.log('75%')
-      }
-      if (i === 5050000) {
-        console.log('99%')
-      }
+      // if (i === 9950000) {
+      //   console.log('1%')
+      // }
+      // if (i === 9500000) {
+      //   console.log('10%')
+      // }
+      // if (i === 9000000) {
+      //   console.log('20%')
+      // }
+      // if (i === 7500000) {
+      //   console.log('50%')
+      // }
+      // if (i === 6250000) {
+      //   console.log('75%')
+      // }
+      // if (i === 5050000) {
+      //   console.log('99%')
+      // }
 
       const zips = [];
       const hosts = [];
@@ -116,10 +119,9 @@ const write10Mil = async (writer, encoding, callback) => {
       host.rules.body = faker.lorem.sentences();
       host.location.body = faker.lorem.sentences();
 
-      var jsonrules = JSON.stringify(host.rules);
-      var jsonlocation = JSON.stringify(host.location)
 
-      const data = `${host.zip}^.-${host.name}^.-${host.image}^.-${host.city}^.-${host.state}^.-${host.body}^.-${host.interaction}^.-${host.superhost}^.-${host.verified}^.-${host.monthJoined}^.-${host.yearJoined}^.-${host.review}^.-${jsonrules}^.-${jsonlocation}\n`;
+
+      const data = `${host.zip}^${host.name}^${host.image}^${host.city}^${host.state}^${host.body}^${host.interaction}^${host.superhost}^${host.verified}^${host.monthJoined}^${host.yearJoined}^${host.review}^${host.rules.checkin}^${host.rules.checkout}^${host.rules.body}^${host.location.body}^${host.location.gettingAround}\n`;
 
       if (i === 5000000) {
         writer.write(data, encoding, callback);
