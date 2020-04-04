@@ -1,24 +1,25 @@
 const fs = require('fs');
 const info = require('./e3urls.js');
-// const seedLinks = require('./seedLinks.js');
-// const faking = require('./seedFaker.js');
+
 const faker = require('faker');
 
 
-const writeHosts = fs.createWriteStream('hosts.csv');
+const writeHosts = fs.createWriteStream('hosts3.csv');
 
 writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rules,location\n', 'utf8');
 
 const write10Mil = async (writer, encoding, callback) => {
-  // console.log('1')
+
+  let i = 10000000;
+  let ok = true;
+
   var links = {
     properties: [],
     hosts: [],
     things: []
   }
   await info.getUrls.then((data) => {
-    console.log('')
-    // console.log(data)
+
     for (var i = 0; i < data.Contents.length; i++) {
       var key = data.Contents[i].Key;
 
@@ -41,15 +42,11 @@ const write10Mil = async (writer, encoding, callback) => {
       console.log('ERRRRR')
       console.log(err);
     });
-  function write() {
 
-    let i = 10000000;
-    let j = 0;
-    let ok = true;
+  function write() {
 
 
     do {
-      // run get urls etc.
       let host = {
         zip: '',
         name: '',
@@ -77,15 +74,27 @@ const write10Mil = async (writer, encoding, callback) => {
 
 
       i--;
-      j++;
-      // console.log('4')
-      // var asyncFunc = info.getUrls()
 
+      // Log percentages
+      if (i === 9950000) {
+        console.log('1%')
+      }
+      if (i === 9500000) {
+        console.log('10%')
+      }
+      if (i === 9000000) {
+        console.log('20%')
+      }
+      if (i === 7500000) {
+        console.log('50%')
+      }
+      if (i === 6250000) {
+        console.log('75%')
+      }
+      if (i === 5050000) {
+        console.log('99%')
+      }
 
-      // Links now is the object that contains all url info.
-      // console.log('5')
-      // s3links = retrieved;
-      // for (var y = 0; y < 10; y++) {
       const zips = [];
       const hosts = [];
       const areas = [];
@@ -113,7 +122,7 @@ const write10Mil = async (writer, encoding, callback) => {
 
       const data = `${host.zip},${host.name},${host.image},${host.city},${host.state},${host.body},${host.interaction},${host.superhost},${host.verified},${host.monthJoined},${host.yearJoined},${host.review},${jsonrules},${jsonlocation}\n`;
 
-      if (i === 5000000) {
+      if (i === 2500000) {
         writer.write(data, encoding, callback);
 
       } else {
@@ -121,13 +130,11 @@ const write10Mil = async (writer, encoding, callback) => {
 
       }
 
-      // });
-      // console.log('End s6')
-      // Add counters
 
-    } while (i > 5000000 && ok);
 
-    if (i > 5000000) {
+    } while (i > 2500000 && ok);
+
+    if (i > 2500000) {
       writer.once('drain', write)
 
     }
@@ -137,6 +144,7 @@ const write10Mil = async (writer, encoding, callback) => {
 };
 
 write10Mil(writeHosts, 'utf-8', async () => {
-  // console.log('7')
+
+  console.log('DONE')
   writeHosts.end();
 });

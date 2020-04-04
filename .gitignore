@@ -25,3 +25,6 @@ build/
 dist/
 config.js
 hosts.csv
+hosts2.csv
+hosts3.csv
+hosts4.csv
