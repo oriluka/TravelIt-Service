@@ -7,17 +7,12 @@ const port = 3005;
 const psql = require('./db/queries.js');
 const bodyParser = require('body-parser');
 
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(bodyParser());
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-// app.get('/area', cors(), function(req, res) {
-//   Area.find(req.query, (err, arr) => res.send(arr));
-// });
 
 ///////// POSTGRES ENDPOINTS /////
 
