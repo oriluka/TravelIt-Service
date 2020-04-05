@@ -29,11 +29,24 @@ module.exports = {
         callback(err);
       });
   },
+// {
+//   "query": {
+//     "id": 10000001
+//   },
+//   "update" : {
+//     "name": "HASDLFKASDFKJ",
+//       "city": "IDK",
+//         "state": "YEAH"
 
+
+//   }
+// }
   put: (params, callback) => {
+    // params.update, params.values
+    var query = `UPDATE hosts SET name = '${params.name}' WHERE id=${params.id};`;
 
-    var query = `DELETE FROM hosts WHERE id=${params.id};`;
-    client.query(query, value)
+    console.log('QUERY: ' + query);
+    client.query(query)
       .then((res) => {
         callback(null, res.rows);
       })
