@@ -1,11 +1,18 @@
 const cassandra = require('cassandra-driver');
 
 const database = new cassandra.Client({
-  contactPoints: [],
-  localDataCenter: '',
-  keyspace: 'ks1'
+  contactPoints: ['localhost'],
+  localDataCenter: 'datacenter1',
+  keyspace: 'mariahservice'
 });
 
-database.connect();
+database.connect(function(err) {
+  if (err) {
+    console.log(err);
+    throw err;
+  } else {
+    console.log('Connected!');
+  }
+});
 
 module.exports = database;
