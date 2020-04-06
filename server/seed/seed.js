@@ -4,13 +4,13 @@ const info = require('./e3urls.js');
 const faker = require('faker');
 
 
-const writeHosts = fs.createWriteStream('hosts3.csv');
+const writeHosts = fs.createWriteStream('hosts.csv');
 
-writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rules,location\n', 'utf8');
+writeHosts.write('id,zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rules,location\n', 'utf8');
 
 const write10Mil = async (writer, encoding, callback) => {
 
-  let i = 10000000;
+  let i = 5000000;
   let ok = true;
 
   var links = {
@@ -75,22 +75,22 @@ const write10Mil = async (writer, encoding, callback) => {
       i--;
 
       // Log percentages
-      if (i === 9950000) {
+      if (i/2 === 9950000) {
         console.log('1%')
       }
-      if (i === 9500000) {
+      if (i/2 === 9500000) {
         console.log('10%')
       }
-      if (i === 9000000) {
+      if (i/2 === 9000000) {
         console.log('20%')
       }
-      if (i === 7500000) {
+      if (i/2 === 7500000) {
         console.log('50%')
       }
-      if (i === 6250000) {
+      if (i/2 === 6250000) {
         console.log('75%')
       }
-      if (i === 5050000) {
+      if (i/2 === 5050000) {
         console.log('99%')
       }
 
@@ -119,9 +119,9 @@ const write10Mil = async (writer, encoding, callback) => {
       var jsonrules = JSON.stringify(host.rules);
       var jsonlocation = JSON.stringify(host.location)
 
-      const data = `${host.zip}^.-${host.name}^.-${host.image}^.-${host.city}^.-${host.state}^.-${host.body}^.-${host.interaction}^.-${host.superhost}^.-${host.verified}^.-${host.monthJoined}^.-${host.yearJoined}^.-${host.review}^.-${jsonrules}^.-${jsonlocation}\n`;
+      const data = `${i}^${host.zip}^${host.name}^${host.image}^${host.city}^${host.state}^${host.body}^${host.interaction}^${host.superhost}^${host.verified}^${host.monthJoined}^${host.yearJoined}^${host.review}^${jsonrules}^${jsonlocation}\n`;
 
-      if (i === 5000000) {
+      if (i === 0) {
         writer.write(data, encoding, callback);
 
       } else {
@@ -131,9 +131,9 @@ const write10Mil = async (writer, encoding, callback) => {
 
 
 
-    } while (i > 5000000 && ok);
+    } while (i > 0 && ok);
 
-    if (i > 5000000) {
+    if (i > 0) {
       writer.once('drain', write)
 
     }
