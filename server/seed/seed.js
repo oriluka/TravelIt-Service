@@ -4,13 +4,13 @@ const info = require('./e3urls.js');
 const faker = require('faker');
 
 
-const writeHosts = fs.createWriteStream('hosts.csv');
+const writeHosts = fs.createWriteStream('hosts2.csv');
 
-writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround\n', 'utf8');
+writeHosts.write('id,zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround\n', 'utf8');
 
 const write10Mil = async (writer, encoding, callback) => {
 
-  let i = 10000000;
+  let i = 5000000;
   let ok = true;
 
   var links = {
@@ -75,8 +75,8 @@ const write10Mil = async (writer, encoding, callback) => {
       i--;
 
       // Log percentages
-      if (i % 1000000 === 0) {
-        console.log(5000000/i)
+      if (i % 500000  === 10) {
+        console.log(i/50000)
       }
       // if (i === 9950000) {
       //   console.log('1%')
@@ -121,9 +121,9 @@ const write10Mil = async (writer, encoding, callback) => {
 
 
 
-      const data = `${host.zip}^${host.name}^${host.image}^${host.city}^${host.state}^${host.body}^${host.interaction}^${host.superhost}^${host.verified}^${host.monthJoined}^${host.yearJoined}^${host.review}^${host.rules.checkin}^${host.rules.checkout}^${host.rules.body}^${host.location.body}^${host.location.gettingAround}\n`;
+      const data = `${i}^${host.zip}^${host.name}^${host.image}^${host.city}^${host.state}^${host.body}^${host.interaction}^${host.superhost}^${host.verified}^${host.monthJoined}^${host.yearJoined}^${host.review}^${host.rules.checkin}^${host.rules.checkout}^${host.rules.body}^${host.location.body}^${host.location.gettingAround}\n`;
 
-      if (i === 5000000) {
+      if (i === 0) {
         writer.write(data, encoding, callback);
 
       } else {
@@ -133,9 +133,9 @@ const write10Mil = async (writer, encoding, callback) => {
 
 
 
-    } while (i > 5000000 && ok);
+    } while (i > 0 && ok);
 
-    if (i > 5000000) {
+    if (i > 0) {
       writer.once('drain', write)
 
     }
