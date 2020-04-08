@@ -4,7 +4,7 @@ WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 DESCRIBE mariahservice
 
 CREATE TABLE hosts(
-  id uuid,
+  id int,
   zip varchar,
   name varchar,
   image varchar,
@@ -31,5 +31,7 @@ COPY hosts(zip, name, image, city, state, body, interaction, superhost, verified
 FROM '/Users/oriluka/Desktop/CS/hackreactor/SDC/mariah-service/hosts.csv'
 WITH DELIMITER '^' CSV HEADER;
 
+
+COPY mariahservice.hosts (id,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround) FROM '/Users/oriluka/Desktop/CS/hackreactor/SDC/mariah-service/hosts.csv' WITH DELIMITER='^' AND HEADER=TRUE;
 
 COPY mariahservice.hosts (id,zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround) FROM '/Users/oriluka/Desktop/CS/hackreactor/SDC/mariah-service/hosts2.csv' WITH DELIMITER='^' AND HEADER=TRUE;

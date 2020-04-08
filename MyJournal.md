@@ -1,6 +1,15 @@
 This journal is written so that the newest entries are at the top. Anything in { } was written at the same time.
 
+## === Db Queries {
+  > Postgres
+    - Not sure why but my query times without any indexing or denormalizing were below the 50ms benchmark requirement. Could be due to my own hardware
+    - Deciding to move on but may attempt to see if I can get quicker speeds once I figure out cassandra
 
+
+  > Cassandra
+    - Cassandra requires a much more confusing download than any database I've used before.
+    - From reading over some of the docs I have a feeling it might be a better database than postgres but the tests will be the ones to decide that.
+}
 
 ## === Creating Seeding Script {
 
