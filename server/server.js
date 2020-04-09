@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 3005;
+const port = 3007;
 const cassandra = require('./db/queries.js');
 const bodyParser = require('body-parser');
 

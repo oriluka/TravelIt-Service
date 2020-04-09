@@ -5,7 +5,8 @@ module.exports = {
 
   get: (params, callback) => {
 
-    var query = `SELECT * FROM hosts WHERE id = ${params.id};`;
+    var query = `SELECT * FROM hosts WHERE name = '${params.name}' ALLOW FILTERING;`;
+    console.log(query)
     client.execute(query, (err, res) => {
       if (err) {
         callback(err);
