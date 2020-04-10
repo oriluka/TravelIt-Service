@@ -4,13 +4,17 @@ const info = require('./e3urls.js');
 const faker = require('faker');
 
 
-const writeHosts = fs.createWriteStream('hosts2.csv');
+const writeHosts = fs.createWriteStream('hosts5.csv');
 
-writeHosts.write('id,zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround\n', 'utf8');
+writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround\n', 'utf8');
 
-const write10Mil = async (writer, encoding, callback) => {
+const writePropsAndThings = fs.createWriteStream('propsAndThings5.csv');
 
-  let i = 5000000;
+writePropsAndThings.write('zip,propType,propImage,propRating,propReview,propDescription,propCost,thingImage,thingType,thingDescription,thingCost\n', 'utf8');
+
+const write10Mil = async (writer, writer2, encoding, callback) => {
+
+  let i = 2000000;
   let ok = true;
 
   var links = {
@@ -19,7 +23,7 @@ const write10Mil = async (writer, encoding, callback) => {
     things: []
   }
   await info.getUrls.then((data) => {
-
+    //console.log(JSON.stringify(data.contents));
     for (var i = 0; i < data.Contents.length; i++) {
       var key = data.Contents[i].Key;
 
@@ -43,12 +47,12 @@ const write10Mil = async (writer, encoding, callback) => {
       console.log(err);
     });
 
-  function write() {
+  function writeStuff() {
 
 
     do {
       let host = {
-        zip: '',
+        zip: 0,
         name: '',
         image: '',
         city: '',
@@ -72,42 +76,37 @@ const write10Mil = async (writer, encoding, callback) => {
         }
       };
 
+      let propAndThing = {
+        zip: 0,
+        propType: '',
+        propImage: '',
+        propRating: '',
+        propReview: '',
+        propDescription: '',
+        propCost: '',
+        thingImage: '',
+        thingType: '',
+        thingDescription: '',
+        thingCost: ''
+      }
+
       i--;
 
       // Log percentages
-      if (i % 500000  === 10) {
-        console.log(i/50000)
-      }
-      // if (i === 9950000) {
-      //   console.log('1%')
-      // }
-      // if (i === 9500000) {
-      //   console.log('10%')
-      // }
-      // if (i === 9000000) {
-      //   console.log('20%')
-      // }
-      // if (i === 7500000) {
-      //   console.log('50%')
-      // }
-      // if (i === 6250000) {
-      //   console.log('75%')
-      // }
-      // if (i === 5050000) {
-      //   console.log('99%')
-      // }
+      console.log(i)
 
       const zips = [];
       const hosts = [];
       const areas = [];
       const propertyImages = links.properties;
-      const thingsImages = links.things;
+      const thingImages = links.things;
       const hostImages = links.hosts;
 
 
-      host.zip = faker.address.zipCode().slice(0, 5);
+      host.zip = Number(faker.address.zipCode().slice(0, 5));
       host.name = faker.name.firstName();
 
+      // Generate random Host data
       host.image = 'https://sdc-mtservice.s3.amazonaws.com/' + hostImages[Math.floor(Math.random() * hostImages.length)];
       host.city = faker.address.city();
       host.state = faker.address.stateAbbr();
@@ -119,14 +118,37 @@ const write10Mil = async (writer, encoding, callback) => {
       host.rules.body = faker.lorem.sentences();
       host.location.body = faker.lorem.sentences();
 
+      // Generate random prop data
+      for (var j = 0; j < 5; j ++) {
+
+        propAndThing.propType = faker.lorem.words();
+        propAndThing.propImage = 'https://sdc-mtservice.s3.amazonaws.com/' + propertyImages[Math.floor(Math.random() * propertyImages.length)];
+        propAndThing.propRatings = Math.random() * 5;
+        propAndThing.propReview = Math.floor(Math.random() * 500);
+        propAndThing.propDescription = faker.lorem.words();
+        propAndThing.propCost = Math.floor(Math.random() * 250) + '$/night';
+
+        propAndThing.thingImage = 'https://sdc-mtservice.s3.amazonaws.com/' + thingImages[Math.floor(Math.random() * thingImages.length)];
+        propAndThing.thingType = faker.lorem.word();
+        propAndThing.thingDescription = faker.lorem.words();
+        propAndThing.thingCost = Math.floor(Math.random() * 150) + '$/person';
+
+        const data2 = `${host.zip}^${propAndThing.propType}^${propAndThing.propImage}^${propAndThing.propRating}^${propAndThing.propReview}^${propAndThing.propDescription}^${propAndThing.propCost}^${propAndThing.thingImage}^${propAndThing.thingType}^${propAndThing.thingDescription}^${propAndThing.thingCost}\n`;
+
+        writer2.write(data2, encoding);
+
+      }
 
 
-      const data = `${i}^${host.zip}^${host.name}^${host.image}^${host.city}^${host.state}^${host.body}^${host.interaction}^${host.superhost}^${host.verified}^${host.monthJoined}^${host.yearJoined}^${host.review}^${host.rules.checkin}^${host.rules.checkout}^${host.rules.body}^${host.location.body}^${host.location.gettingAround}\n`;
+      const data = `${host.zip}^${host.name}^${host.image}^${host.city}^${host.state}^${host.body}^${host.interaction}^${host.superhost}^${host.verified}^${host.monthJoined}^${host.yearJoined}^${host.review}^${host.rules.checkin}^${host.rules.checkout}^${host.rules.body}^${host.location.body}^${host.location.gettingAround}\n`;
+
+
 
       if (i === 0) {
         writer.write(data, encoding, callback);
 
       } else {
+
         ok = writer.write(data, encoding);
 
       }
@@ -136,16 +158,17 @@ const write10Mil = async (writer, encoding, callback) => {
     } while (i > 0 && ok);
 
     if (i > 0) {
-      writer.once('drain', write)
+      writer.once('drain', writeStuff)
 
     }
 
   };
-  write();
+  writeStuff();
 };
 
-write10Mil(writeHosts, 'utf-8', async () => {
+write10Mil(writeHosts, writePropsAndThings, 'utf-8', async () => {
 
   console.log('DONE')
   writeHosts.end();
+  writePropsAndThings.end();
 });
