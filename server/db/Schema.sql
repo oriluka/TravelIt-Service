@@ -44,11 +44,11 @@ Helpful Stuff:
 
 
 COPY hosts(zip, name, image, city, state, body, interaction, superhost, verified, monthJoined, yearJoined, review, rulesCheckin, rulesCheckout, rulesBody, locationBody, locationGettingAround)
-FROM '/Users/oriluka/Desktop/CS/hackreactor/SDC/mariah-service/hosts2.csv'
+FROM '/Users/oriluka/Desktop/CS/hackreactor/SDC/mariah-service/hosts5.csv'
 DELIMITER '^' CSV HEADER;
 
 COPY propsandthings(zip, propType, propImage, propRating, propReview, propDescription, propCost, thingImage, thingType, thingDescription, thingCost)
-FROM '/Users/oriluka/Desktop/CS/hackreactor/SDC/mariah-service/propsandthings.csv'
+FROM '/Users/oriluka/Desktop/CS/hackreactor/SDC/mariah-service/propsandthings5.csv'
 DELIMITER '^' CSV HEADER;
 SELECT
    COUNT(*)
