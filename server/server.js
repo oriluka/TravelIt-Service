@@ -1,6 +1,14 @@
-require('newrelic');
+// load the agent
+const newrelic = require('newrelic')
+// module loaded before newrelic
+const express = require('express')
+// instrument express _after_ the agent has been loaded
+newrelic.instrumentLoadedModule(
+  'express', // the module's name, as a string
+  express // the module instance
+);
 
-const express = require('express');
+// const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
