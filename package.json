@@ -8,7 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "devStart": "nodemon ./server/server.js",
+    "devStart": "node --require newrelic ./server/server.js",
     "start": "pm2 start ./server/server.js",
     "build": "webpack --config webpack.config.js -w",
     "build2": "webpack --mode production",
@@ -43,6 +43,7 @@
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "jest": "^25.1.0",
     "jest-css-modules": "^2.1.0",
+    "newrelic": "^6.5.0",
     "nodemon": "^2.0.2",
     "pg": "^8.0.0",
     "supertest": "^4.0.2",
