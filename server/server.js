@@ -18,6 +18,19 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 
 ///////// POSTGRES ENDPOINTS /////
+app.get('/hostrandom', (req, res) => {
+  host.get(req.body, (err, data) => {
+    if (err) {
+      console.log('error');
+      res.status(400);
+      res.send(err);
+    } else {
+      res.status(200);
+      res.send(data);
+    }
+  });
+});
+
 
 app.get('/host', (req, res) => {
   host.get(req.body, (err, data) => {

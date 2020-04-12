@@ -14,33 +14,39 @@ function imageSlideClick(className) {
   const el = document.querySelector('.' + className);
 }
 
-axios.get('http://localhost:3004/zip', {})
-  .then(res => {
-    let randomIndex = Math.floor(Math.random() * 10);
-    zipCode = res.data[randomIndex].zip;
+var hostInfo;
+// Get a random host
+axios.get('http://localhost:3004/hostrandom')
+  // then get the area based on the random host zipcode
+  .then((host)=> {
+    hostInfo = host;
+    return axios.get('http://localhost:3004/stuff', {zip: result.body.zip})
   })
-  .then(() => {
-    axios.get('http://localhost:3004/area', {
-      params: {
-        zip: zipCode
-      }
-    })
-  .then(res => {
-    areaData = res.data[0];
+  .then((stuff) => {
+    ReactDOM.render(<App area={areaData} host={hostData} api={config} />, appDom)
   })
-  .catch(err => console.log(err))
-  .then(() => {
-    axios.get('http://localhost:3004/host', {
-      params: {
-        zip: zipCode
-      }
-    })
-      .then(res => {
-        hostData = res.data[0];
-      })
-      .catch(err => console.log(err))
-      .then(() => {
-        ReactDOM.render(<App area={areaData} host={hostData} api={config}/>, appDom);
-      });
-  })
-});
+  .catch((err) => {
+    console.log('An error has occured trying to retrive data: ' + err);
+  });
+
+
+// axios.get('http://localhost:3004/stuff')
+//   .then(res => {
+//     areaData = res.data[0];
+//   })
+//   .catch(err => console.log(err))
+//   .then(() => {
+//     axios.get('http://localhost:3004/host', {
+//       params: {
+//         zip: zipCode
+//       }
+//     })
+//       .then(res => {
+//         hostData = res.data[0];
+//       })
+//       .catch(err => console.log(err))
+//       .then(() => {
+//         ReactDOM.render(<App area={areaData} host={hostData} api={config}/>, appDom);
+//       });
+//   })
+// });
