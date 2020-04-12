@@ -5,8 +5,9 @@ const express = require('express');
 const app = express();
 
 const cors = require('cors');
-const port = 3008;
-const psql = require('./db/queries.js');
+const port = 3007;
+const host = require('./db/hostQueries.js');
+const thing = require('./db/thingQueries.js');
 const bodyParser = require('body-parser');
 
 
@@ -19,7 +20,7 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 ///////// POSTGRES ENDPOINTS /////
 
 app.get('/host', (req, res) => {
-  psql.get(req.body, (err, data) => {
+  host.get(req.body, (err, data) => {
     if (err) {
       console.log('error');
       res.status(400);
@@ -32,7 +33,7 @@ app.get('/host', (req, res) => {
 });
 
 app.post('/host', cors(), (req, res) => {
-  psql.post(req.body, (err, data) => {
+  host.post(req.body, (err, data) => {
     if (err) {
       res.status(400);
       res.send(err);
@@ -45,7 +46,7 @@ app.post('/host', cors(), (req, res) => {
 
 // put
 app.put('/host', (req, res) => {
-  psql.put(req.body, (err, data) => {
+  host.put(req.body, (err, data) => {
     if (err) {
       res.status(400);
       res.send(err);
@@ -58,7 +59,7 @@ app.put('/host', (req, res) => {
 
 // delete
 app.delete('/host', (req, res) => {
-  psql.delete(req.body, (err, data) => {
+  host.delete(req.body, (err, data) => {
     if (err) {
       res.status(400);
       res.send(err);
@@ -69,4 +70,18 @@ app.delete('/host', (req, res) => {
   });
 });
 
+////// THING ENDPOINTS
+
+app.get('/things', (req, res) => {
+  thing.get(req.body, (err, data) => {
+    if (err) {
+      console.log('error');
+      res.status(400);
+      res.send(err);
+    } else {
+      res.status(200);
+      res.send(data);
+    }
+  });
+});
 module.exports = app;

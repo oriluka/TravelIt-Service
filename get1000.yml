@@ -1,0 +1,15 @@
+
+config:
+  target: "http://localhost:3007"
+  # processor: "./dataGen/stressSeeder.js"
+  phases:
+    - duration: 60
+      arrivalRate: 1000
+
+scenarios:
+  - name: "GET host"
+    flow:
+      - get:
+          url: "/host"
+          json:
+            id: 450230
