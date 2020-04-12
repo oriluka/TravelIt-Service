@@ -19,14 +19,17 @@ var hostInfo;
 axios.get('http://localhost:3004/hostrandom')
   // then get the area based on the random host zipcode
   .then((host)=> {
-    hostInfo = host;
-    return axios.get('http://localhost:3004/stuff', {zip: result.body.zip})
+    hostInfo = host.data;
+    // return axios.get('http://localhost:3004/things', hostInfo);
+    return axios.get(`http://localhost:3004/things?zip=${hostInfo.zip}`);
   })
   .then((stuff) => {
-    ReactDOM.render(<App area={areaData} host={hostData} api={config} />, appDom)
+    console.log('STUFF')
+    console.log(stuff.data)
+    ReactDOM.render(<App area={stuff.data} host={hostInfo} api={config} />, appDom);
   })
   .catch((err) => {
-    console.log('An error has occured trying to retrive data: ' + err);
+    console.log('An error has occured trying to retreive data: ' + err);
   });
 
 

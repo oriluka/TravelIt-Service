@@ -8,12 +8,26 @@ module.exports = {
     var query = `SELECT * FROM hosts WHERE id = ${params.id};`;
     client.query(query, (err, res) => {
       if (err) {
-        callback(err);
         console.log(err);
+        callback(err);
       } else {
         callback(null, res.rows);
       }
-    })
+    });
+  },
+
+  getRandom: (callback) => {
+    var num = Math.ceil(Math.random() * 1000000);
+    var query = `SELECT * FROM hosts WHERE id = ${num};`;
+    client.query(query, (err, res) => {
+      if (err) {
+        console.log(err);
+        callback(err);
+      } else {
+        console.log(num);
+        callback(null, res.rows);
+      }
+    });
   },
 
   post: (params, callback) => {
@@ -31,9 +45,7 @@ module.exports = {
   },
 
   put: (params, callback) => {
-
     var query = `UPDATE hosts SET name = '${params.name}' WHERE id=${params.id};`;
-
     client.query(query)
       .then((res) => {
         callback(null, res.rows);
@@ -45,7 +57,6 @@ module.exports = {
   },
 
   delete: (params, callback) => {
-
     var query = `DELETE FROM hosts WHERE id = ${params.id};`;
     client.query(query)
       .then((host) => {

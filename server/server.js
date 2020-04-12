@@ -5,10 +5,11 @@ const express = require('express');
 const app = express();
 
 const cors = require('cors');
-const port = 3007;
+const port = 3004;
 const host = require('./db/hostQueries.js');
 const thing = require('./db/thingQueries.js');
 const bodyParser = require('body-parser');
+
 
 
 app.use(express.static(path.resolve(__dirname, '../public')));
@@ -19,14 +20,14 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 ///////// POSTGRES ENDPOINTS /////
 app.get('/hostrandom', (req, res) => {
-  host.get(req.body, (err, data) => {
+  host.getRandom((err, data) => {
     if (err) {
       console.log('error');
       res.status(400);
       res.send(err);
     } else {
       res.status(200);
-      res.send(data);
+      res.send(data[0]);
     }
   });
 });
@@ -85,8 +86,9 @@ app.delete('/host', (req, res) => {
 
 ////// THING ENDPOINTS
 
-app.get('/things', (req, res) => {
-  thing.get(req.body, (err, data) => {
+app.get('/things', cors(), (req, res) => {
+  console.log(req.query);
+  thing.get(req.query, (err, data) => {
     if (err) {
       console.log('error');
       res.status(400);
