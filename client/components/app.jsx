@@ -16,10 +16,10 @@ function App(props) {
         <Neighborhood data={props.host} api={props.api}/>
       </div>
       <div>
-        <Properties data={props.area.properties}/>
+        <Properties data={props.area}/>
       </div>
       <div>
-        <ThingsToDo data={props.area.thingsToDo}/>
+        <ThingsToDo data={props.area}/>
       </div>
     </div>
   );

@@ -87,7 +87,6 @@ app.delete('/host', (req, res) => {
 ////// THING ENDPOINTS
 
 app.get('/things', cors(), (req, res) => {
-  console.log(req.query);
   thing.get(req.query, (err, data) => {
     if (err) {
       console.log('error');

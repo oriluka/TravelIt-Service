@@ -26,6 +26,7 @@ axios.get('http://localhost:3004/hostrandom')
   .then((stuff) => {
     console.log('STUFF')
     console.log(stuff.data)
+    console.log(hostInfo);
     ReactDOM.render(<App area={stuff.data} host={hostInfo} api={config} />, appDom);
   })
   .catch((err) => {

@@ -4,8 +4,6 @@ const client = require('./postgres.js');
 module.exports = {
 
   get: (params, callback) => {
-    console.log('///////////////////////////////')
-    console.log(params)
     var query = `SELECT * FROM propsandthings WHERE zip = ${params.zip} LIMIT 5;`;
     client.query(query, (err, res) => {
       if (err) {

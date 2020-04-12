@@ -23,9 +23,9 @@ class ThingsToDo extends React.Component {
           {this.props.data.map(thing => (
             <div className={this.props.css.entry}>
               <img src={thing.image} width={280} height={180} mode='fit'></img>
-              <p className={this.props.css.type}>{thing.thingsType}</p>
-              <p className={this.props.css.description}>{thing.description}</p>
-              <p className={this.props.css.cost}>{thing.cost}</p>
+              <p className={this.props.css.type}>{thing.thingtype}</p>
+              <p className={this.props.css.description}>{thing.thingdescription}</p>
+              <p className={this.props.css.cost}>{thing.thingcost}</p>
             </div>
           ))}
         <span className={`fas fa-chevron-left ${this.props.css.prev} ${this.props.css.hidden}`}></span>
