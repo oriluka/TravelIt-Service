@@ -22,7 +22,7 @@ class ThingsToDo extends React.Component {
         <div className={this.props.css.carousel}>
           {this.props.data.map(thing => (
             <div className={this.props.css.entry}>
-              <img src={thing.image} width={280} height={180} mode='fit'></img>
+              <img src={thing.thingimage} width={280} height={180} mode='fit'></img>
               <p className={this.props.css.type}>{thing.thingtype}</p>
               <p className={this.props.css.description}>{thing.thingdescription}</p>
               <p className={this.props.css.cost}>{thing.thingcost}</p>

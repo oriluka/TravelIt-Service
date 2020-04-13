@@ -19,7 +19,7 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 
 ///////// POSTGRES ENDPOINTS /////
-app.get('/hostrandom', (req, res) => {
+app.get('/hostrandom', cors(), (req, res) => {
   host.getRandom((err, data) => {
     if (err) {
       console.log('error');
