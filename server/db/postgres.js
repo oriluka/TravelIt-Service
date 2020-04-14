@@ -1,15 +1,20 @@
-const { Pool, Client } = require('pg')
-const client = new Client({
-  host: 'localhost',
+const { Pool } = require('pg')
+const pool = new Pool({
+  host: 'ec2-35-182-26-74.ca-central-1.compute.amazonaws.com',
   database: 'mariahservice',
-  password: null
+  user: 'power_user',
+  password: 'power',
+  port: '5432',
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 5000
 });
 
-client.connect(err => {
+pool.connect(err => {
   if (err) {
     console.error('connection error', err.stack);
   } else {
     console.log('connected to postgres');
   }
-})
-module.exports = client;
+});
+module.exports = pool;

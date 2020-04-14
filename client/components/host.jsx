@@ -25,7 +25,7 @@ class Host extends React.Component {
         <div className={style.profile}>
           <h2>Hosted by {data.name}</h2>
           <p className={style.location}>
-            {data.city}, {data.state} · Joined in {data.monthJoined} {data.yearJoined}
+            {data.city}, {data.state} · Joined in {data.monthjoined} {data.yearjoined}
           </p>
           <p>
             <span class="fas fa-star"></span> &nbsp; {data.review} Reviews &nbsp; <span class="fas fa-badge-check"></span> &nbsp; {data.verified}
