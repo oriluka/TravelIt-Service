@@ -4,7 +4,7 @@ const info = require('./e3urls.js');
 const faker = require('faker');
 
 
-const writeHosts = fs.createWriteStream('minihosts.csv');
+const writeHosts = fs.createWriteStream('maxhosts2.csv');
 
 writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround\n', 'utf8');
 
@@ -14,7 +14,7 @@ writePropsAndThings.write('zip,propType,propImage,propRating,propReview,propDesc
 
 const write10Mil = async (writer, writer2, encoding, callback) => {
 
-  let i = 100;
+  let i = 488438;
   let ok = true;
 
   var links = {
@@ -40,7 +40,10 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
         links.things.push(key);
       }
     }
-    console.log('Done retrieving links');
+    // console.log(JSON.stringify(links));
+    // console.log('/////////////////////////////')
+    // console.log('Done retrieving links');
+
   })
     .catch((err) => {
       console.log('ERRRRR')
@@ -118,26 +121,26 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
       host.rules.body = faker.lorem.sentences();
       host.location.body = faker.lorem.sentences();
 
-      // Generate random prop data
-      for (var j = 0; j < 5; j ++) {
+      // // Generate random prop data
+      // for (var j = 0; j < 5; j ++) {
 
-        propAndThing.propType = faker.lorem.words();
-        propAndThing.propImage = 'https://sdc-mtservice.s3.amazonaws.com/' + propertyImages[Math.floor(Math.random() * propertyImages.length)];
-        propAndThing.propRatings = Math.random() * 5;
-        propAndThing.propReview = Math.floor(Math.random() * 500);
-        propAndThing.propDescription = faker.lorem.words();
-        propAndThing.propCost = Math.floor(Math.random() * 250) + '$/night';
+      //   propAndThing.propType = faker.lorem.words();
+      //   propAndThing.propImage = 'https://sdc-mtservice.s3.amazonaws.com/' + propertyImages[Math.floor(Math.random() * propertyImages.length)];
+      //   propAndThing.propRatings = Math.random() * 5;
+      //   propAndThing.propReview = Math.floor(Math.random() * 500);
+      //   propAndThing.propDescription = faker.lorem.words();
+      //   propAndThing.propCost = Math.floor(Math.random() * 250) + '$/night';
 
-        propAndThing.thingImage = 'https://sdc-mtservice.s3.amazonaws.com/' + thingImages[Math.floor(Math.random() * thingImages.length)];
-        propAndThing.thingType = faker.lorem.word();
-        propAndThing.thingDescription = faker.lorem.words();
-        propAndThing.thingCost = Math.floor(Math.random() * 150) + '$/person';
+      //   propAndThing.thingImage = 'https://sdc-mtservice.s3.amazonaws.com/' + thingImages[Math.floor(Math.random() * thingImages.length)];
+      //   propAndThing.thingType = faker.lorem.word();
+      //   propAndThing.thingDescription = faker.lorem.words();
+      //   propAndThing.thingCost = Math.floor(Math.random() * 150) + '$/person';
 
-        const data2 = `${host.zip}^${propAndThing.propType}^${propAndThing.propImage}^${propAndThing.propRating}^${propAndThing.propReview}^${propAndThing.propDescription}^${propAndThing.propCost}^${propAndThing.thingImage}^${propAndThing.thingType}^${propAndThing.thingDescription}^${propAndThing.thingCost}\n`;
+      //   const data2 = `${host.zip}^${propAndThing.propType}^${propAndThing.propImage}^${propAndThing.propRating}^${propAndThing.propReview}^${propAndThing.propDescription}^${propAndThing.propCost}^${propAndThing.thingImage}^${propAndThing.thingType}^${propAndThing.thingDescription}^${propAndThing.thingCost}\n`;
 
-        writer2.write(data2, encoding);
+      //   writer2.write(data2, encoding);
 
-      }
+      // }
 
 
       const data = `${host.zip}^${host.name}^${host.image}^${host.city}^${host.state}^${host.body}^${host.interaction}^${host.superhost}^${host.verified}^${host.monthJoined}^${host.yearJoined}^${host.review}^${host.rules.checkin}^${host.rules.checkout}^${host.rules.body}^${host.location.body}^${host.location.gettingAround}\n`;
@@ -145,6 +148,7 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
 
 
       if (i === 0) {
+        console.log(links)
         writer.write(data, encoding, callback);
 
       } else {
@@ -163,12 +167,13 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
     }
 
   };
-  writeStuff();
+  setTimeout(writeStuff(), 10000)
+
 };
 
 write10Mil(writeHosts, writePropsAndThings, 'utf-8', async () => {
 
-  console.log('DONE')
   writeHosts.end();
-  writePropsAndThings.end();
+  console.log('DONE')
+  // writePropsAndThings.end();
 });
