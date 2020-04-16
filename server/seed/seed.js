@@ -14,7 +14,7 @@ writePropsAndThings.write('zip,propType,propImage,propRating,propReview,propDesc
 
 const write10Mil = async (writer, writer2, encoding, callback) => {
 
-  let i = 488438;
+  let i = 5000000;
   let ok = true;
 
   var links = {
@@ -93,7 +93,9 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
         thingCost: ''
       }
 
-      i--;
+      if (i / 100000 === 5 || i / 100000 === 10 || i / 100000 === 15 || i / 100000 === 25  || i / 100000 === 35 || i / 100000 === 40 || i / 100000 === 45) {
+        console.log(i)
+      }
 
       // Log percentages
       console.log(i)
@@ -121,26 +123,26 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
       host.rules.body = faker.lorem.sentences();
       host.location.body = faker.lorem.sentences();
 
-      // // Generate random prop data
-      // for (var j = 0; j < 5; j ++) {
+      // Generate random prop data
+      for (var j = 0; j < 1; j ++) {
 
-      //   propAndThing.propType = faker.lorem.words();
-      //   propAndThing.propImage = 'https://sdc-mtservice.s3.amazonaws.com/' + propertyImages[Math.floor(Math.random() * propertyImages.length)];
-      //   propAndThing.propRatings = Math.random() * 5;
-      //   propAndThing.propReview = Math.floor(Math.random() * 500);
-      //   propAndThing.propDescription = faker.lorem.words();
-      //   propAndThing.propCost = Math.floor(Math.random() * 250) + '$/night';
+        propAndThing.propType = faker.lorem.words();
+        propAndThing.propImage = 'https://sdc-mtservice.s3.amazonaws.com/' + propertyImages[Math.floor(Math.random() * propertyImages.length)];
+        propAndThing.propRatings = Math.random() * 5;
+        propAndThing.propReview = Math.floor(Math.random() * 500);
+        propAndThing.propDescription = faker.lorem.words();
+        propAndThing.propCost = Math.floor(Math.random() * 250) + '$/night';
 
-      //   propAndThing.thingImage = 'https://sdc-mtservice.s3.amazonaws.com/' + thingImages[Math.floor(Math.random() * thingImages.length)];
-      //   propAndThing.thingType = faker.lorem.word();
-      //   propAndThing.thingDescription = faker.lorem.words();
-      //   propAndThing.thingCost = Math.floor(Math.random() * 150) + '$/person';
+        propAndThing.thingImage = 'https://sdc-mtservice.s3.amazonaws.com/' + thingImages[Math.floor(Math.random() * thingImages.length)];
+        propAndThing.thingType = faker.lorem.word();
+        propAndThing.thingDescription = faker.lorem.words();
+        propAndThing.thingCost = Math.floor(Math.random() * 150) + '$/person';
 
-      //   const data2 = `${host.zip}^${propAndThing.propType}^${propAndThing.propImage}^${propAndThing.propRating}^${propAndThing.propReview}^${propAndThing.propDescription}^${propAndThing.propCost}^${propAndThing.thingImage}^${propAndThing.thingType}^${propAndThing.thingDescription}^${propAndThing.thingCost}\n`;
+        const data2 = `${host.zip}^${propAndThing.propType}^${propAndThing.propImage}^${propAndThing.propRating}^${propAndThing.propReview}^${propAndThing.propDescription}^${propAndThing.propCost}^${propAndThing.thingImage}^${propAndThing.thingType}^${propAndThing.thingDescription}^${propAndThing.thingCost}\n`;
 
-      //   writer2.write(data2, encoding);
+        writer2.write(data2, encoding);
 
-      // }
+      }
 
 
       const data = `${host.zip}^${host.name}^${host.image}^${host.city}^${host.state}^${host.body}^${host.interaction}^${host.superhost}^${host.verified}^${host.monthJoined}^${host.yearJoined}^${host.review}^${host.rules.checkin}^${host.rules.checkout}^${host.rules.body}^${host.location.body}^${host.location.gettingAround}\n`;
@@ -148,7 +150,6 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
 
 
       if (i === 0) {
-        console.log(links)
         writer.write(data, encoding, callback);
 
       } else {
@@ -167,13 +168,13 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
     }
 
   };
-  setTimeout(writeStuff(), 10000)
+  writeStuff()
 
 };
 
 write10Mil(writeHosts, writePropsAndThings, 'utf-8', async () => {
 
   writeHosts.end();
+  writePropsAndThings.end();
   console.log('DONE')
-  // writePropsAndThings.end();
 });
