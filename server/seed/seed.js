@@ -4,17 +4,17 @@ const info = require('./e3urls.js');
 const faker = require('faker');
 
 
-const writeHosts = fs.createWriteStream('../maxhosts.csv');
+const writeHosts = fs.createWriteStream('test.csv');
 
 writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround\n', 'utf8');
 
-const writePropsAndThings = fs.createWriteStream('../propsAndThings.csv');
+const writePropsAndThings = fs.createWriteStream('test2.csv');
 
 writePropsAndThings.write('zip,propType,propImage,propRating,propReview,propDescription,propCost,thingImage,thingType,thingDescription,thingCost\n', 'utf8');
 
 const write10Mil = async (writer, writer2, encoding, callback) => {
 
-  let i = 5000000;
+  let i = 1;
   let ok = true;
 
   var links = {
@@ -169,6 +169,7 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
 
   };
   writeStuff()
+  console.log(JSON.stringify(links.properties))
 
 };
 
