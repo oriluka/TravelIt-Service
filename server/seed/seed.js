@@ -4,11 +4,11 @@ const info = require('./e3urls.js');
 const faker = require('faker');
 
 
-const writeHosts = fs.createWriteStream('maxhosts2.csv');
+const writeHosts = fs.createWriteStream('../maxhosts.csv');
 
 writeHosts.write('zip,name,image,city,state,body,interaction,superhost,verified,monthJoined,yearJoined,review,rulesCheckin,rulesCheckout,rulesBody,locationBody,locationGettingAround\n', 'utf8');
 
-const writePropsAndThings = fs.createWriteStream('miniprops.csv');
+const writePropsAndThings = fs.createWriteStream('../propsAndThings.csv');
 
 writePropsAndThings.write('zip,propType,propImage,propRating,propReview,propDescription,propCost,thingImage,thingType,thingDescription,thingCost\n', 'utf8');
 
@@ -92,13 +92,13 @@ const write10Mil = async (writer, writer2, encoding, callback) => {
         thingDescription: '',
         thingCost: ''
       }
-
+      i --
       if (i / 100000 === 5 || i / 100000 === 10 || i / 100000 === 15 || i / 100000 === 25  || i / 100000 === 35 || i / 100000 === 40 || i / 100000 === 45) {
         console.log(i)
       }
 
       // Log percentages
-      console.log(i)
+
 
       const zips = [];
       const hosts = [];
