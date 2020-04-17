@@ -8,7 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "devStart": "node ./server/server.js",
+    "devStart": "node --require newrelic ./server/server.js",
     "start": "pm2 start ./server/server.js",
     "build": "webpack --config webpack.config.js -w",
     "build2": "webpack --mode production",
