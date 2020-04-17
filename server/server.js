@@ -35,6 +35,7 @@ app.get('/hostrandom', cors(), (req, res) => {
 
 
 app.get('/host', (req, res) => {
+
   host.get(req.body, (err, data) => {
     if (err) {
       console.log('error');
@@ -48,7 +49,7 @@ app.get('/host', (req, res) => {
 });
 
 app.post('/host', cors(), (req, res) => {
-  host.post(req.body, (err, data) => {
+  host.post(req.query, (err, data) => {
     if (err) {
       res.status(400);
       res.send(err);
