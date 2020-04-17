@@ -24,7 +24,6 @@ module.exports = {
         console.log(err);
         callback(err);
       } else {
-        console.log(num);
         callback(null, res.rows);
       }
     });
