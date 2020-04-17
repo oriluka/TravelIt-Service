@@ -13,7 +13,7 @@ const bodyParser = require('body-parser');
 
 
 app.use(express.static(path.resolve(__dirname, '../public')));
-app.use('/loaderio-94da5df3431a90f8e36912477fb2596b/', express.static(path.resolve(__dirname, '../public/loaderio-94da5df3431a90f8e36912477fb2596b.txt'))
+app.use('/loaderio-94da5df3431a90f8e36912477fb2596b/', express.static(path.resolve(__dirname, '../public/loaderio-94da5df3431a90f8e36912477fb2596b.txt')));
 app.use(bodyParser());
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
