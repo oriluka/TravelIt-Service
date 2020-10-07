@@ -1,4 +1,4 @@
-# Project Name
+# TravelIt
 
 > Back End project trying to scale up an inherited legacy codebase to hold 10 mil unique records and handle real user traffic while being as cheap as possible (Deployed as a server and database each as separate AWS t2 microsto allow for further horizontal scaling).  
 
